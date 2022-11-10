@@ -2,8 +2,6 @@ package bst
 
 import (
 	"fmt"
-
-	"github.com/shubham-gaur/logit"
 )
 
 const (
@@ -130,7 +128,6 @@ func NewBST() BSTService {
 }
 
 func RunBST() {
-	logit.Info.Println(logit.GetCurrentFunctionName(), "Searching BST::")
 	tree := NewBST()
 	tree.Insert(10)
 	tree.Insert(5)

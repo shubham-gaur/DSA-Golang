@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dsa/custom-type/setarray"
 	"dsa/recursion/maze"
 	"dsa/searching/bst"
 
@@ -10,6 +11,12 @@ import (
 func main() {
 	app := "DSA Tutorials"
 	logit.Init(&app)
+	logit.Info.Println(logit.GetCurrentFunctionName(), "Set In Array::")
+	setarray.RunSetInArray()
+	logit.Info.Println(logit.GetCurrentFunctionName(), "Searching BST::")
 	bst.RunBST()
-	maze.RunMaze()
+	logit.Info.Println(logit.GetCurrentFunctionName(), "Integer Maze::")
+	maze.RunIntMaze()
+	logit.Info.Println(logit.GetCurrentFunctionName(), "Boolean Maze::")
+	maze.RunBoolMaze()
 }

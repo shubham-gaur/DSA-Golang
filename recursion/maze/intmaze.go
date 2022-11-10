@@ -13,20 +13,30 @@ type maze struct {
 }
 
 func InitIntMaze(r, c int) MazeServicer {
-	return &maze{
+	fmt.Println("Integer Matrix")
+	maze := &maze{
 		rows: r,
 		cols: c,
 	}
+	for r := 0; r < maze.rows; r++ {
+		fmt.Printf("[")
+		for c := 0; c < maze.cols; c++ {
+			fmt.Print(" ", 1)
+		}
+		fmt.Println("]")
+	}
+	fmt.Println()
+	return maze
 }
 
 func (m *maze) RightDown() {
 	fmt.Println("Count: ", countRightDown(m.rows, m.cols))
+	fmt.Println("Path List Right Down:\n\t", saveRightDownPath("", m.rows, m.cols))
 	printRightDownPath("", m.rows, m.cols)
-	fmt.Println(saveRightDownPath("", m.rows, m.cols))
 }
 
 func (m *maze) RightDownSlant() {
-	fmt.Println(saveRightDownSlantPath("", m.rows, m.cols))
+	fmt.Println("Path List Right Down Slant:\n\t", saveRightDownSlantPath("", m.rows, m.cols))
 }
 
 func countRightDown(r, c int) int {

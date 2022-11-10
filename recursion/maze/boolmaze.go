@@ -13,21 +13,26 @@ type BoolMazeServicer interface {
 }
 
 func InitBoolMaze(r, c int) BoolMazeServicer {
+	fmt.Println("Boolean Matrix")
 	bm := boolmaze{rows: r, cols: c, val: make([][]bool, r, c)}
 	for r := 0; r < bm.rows; r++ {
-		bm.val[r] = make([]bool, 3)
+		fmt.Printf("[")
+		bm.val[r] = make([]bool, c)
 		for c := 0; c < bm.cols; c++ {
 			if r == 1 && c == 1 {
 			} else {
 				bm.val[r][c] = true
 			}
+			fmt.Printf("%-5v ", bm.val[r][c])
 		}
+		fmt.Println("]")
 	}
+	fmt.Println()
 	return &bm
 }
 
 func (bm *boolmaze) RightDownSlant() {
-	fmt.Println(getRightDownSlantPathWithRestriction("", *bm, 0, 0))
+	fmt.Println("Path List Right Down Slant:\n\t", getRightDownSlantPathWithRestriction("", *bm, 0, 0))
 	printRightDownSlantPathWithRestriction("", *bm, 0, 0)
 }
 
