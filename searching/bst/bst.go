@@ -148,4 +148,6 @@ func RunBST() {
 	fmt.Printf("\nPost-Order: ")
 	postOrderTraversal(tree.GetRoot())
 	fmt.Println()
+	fmt.Println("20 Exists:", tree.Search(20))
+	fmt.Println("21 Exists:", tree.Search(21))
 }
