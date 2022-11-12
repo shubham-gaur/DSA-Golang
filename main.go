@@ -2,6 +2,7 @@ package main
 
 import (
 	"dsa/custom-type/setarray"
+	"dsa/recursion/array"
 	"dsa/recursion/maze"
 	"dsa/searching/bst"
 
@@ -19,4 +20,6 @@ func main() {
 	maze.RunIntMaze()
 	logit.Info.Println(logit.GetCurrentFunctionName(), "Boolean Maze::")
 	maze.RunBoolMaze()
+	logit.Info.Println(logit.GetCurrentFunctionName(), "Matching Brackets::")
+	array.RunCheckMatchingBrackets()
 }
