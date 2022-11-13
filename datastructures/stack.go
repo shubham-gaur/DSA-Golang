@@ -1,36 +1,57 @@
 package datastructures
 
+import (
+	"fmt"
+	"reflect"
+)
+
 type StackServicer interface {
-	Push(ele string)
+	Push(ele any)
 	Pop()
-	Top() string
-	GetStack() []string
+	Top() any
+	GetStack() []any
 	IsEmpty() bool
 }
 
 type stack struct {
-	stackArr []string
+	stackArr  []any
+	stackType reflect.Type
 }
 
-func InitStack(s string) StackServicer {
-	var stackArr []string
-	for i := 0; i < len(s); i++ {
-		stackArr = append(stackArr, string(s[i]))
+func InitStack[T string | []int](ele T) StackServicer {
+	var stackArr []any
+	var stackType reflect.Type
+	if arr, ok := any(ele).([]int); ok {
+		for i := 0; i < len(ele); i++ {
+			stackArr = append(stackArr, arr[i])
+		}
+		stackType = reflect.TypeOf(len(arr))
+	} else if arr, ok := any(ele).(string); ok {
+		for i := 0; i < len(ele); i++ {
+			stackArr = append(stackArr, arr[i])
+		}
+		stackType = reflect.TypeOf(ele)
 	}
+
 	return &stack{
-		stackArr: stackArr,
+		stackArr:  stackArr,
+		stackType: stackType,
 	}
 }
 
-func (s *stack) Push(ele string) {
-	s.stackArr = append(s.stackArr, ele)
+func (s *stack) Push(ele any) {
+	if s.stackType == reflect.TypeOf(ele) {
+		s.stackArr = append(s.stackArr, ele)
+	} else {
+		fmt.Println("Does not support this type")
+	}
 }
 
 func (s *stack) Pop() {
 	s.stackArr = s.stackArr[0 : len(s.stackArr)-1]
 }
 
-func (s *stack) Top() string {
+func (s *stack) Top() any {
 	if len(s.stackArr) == 0 {
 		return ""
 	} else {
@@ -38,7 +59,7 @@ func (s *stack) Top() string {
 	}
 }
 
-func (s *stack) GetStack() []string {
+func (s *stack) GetStack() []any {
 	return s.stackArr
 }
 
