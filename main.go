@@ -2,7 +2,7 @@ package main
 
 import (
 	"dsa/custom-type/setarray"
-	"dsa/recursion/array"
+	"dsa/problems/array"
 	"dsa/recursion/maze"
 	"dsa/searching/bst"
 

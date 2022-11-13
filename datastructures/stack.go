@@ -53,7 +53,7 @@ func (s *stack) Pop() {
 
 func (s *stack) Top() any {
 	if len(s.stackArr) == 0 {
-		return ""
+		return nil
 	} else {
 		return s.stackArr[len(s.stackArr)-1]
 	}
