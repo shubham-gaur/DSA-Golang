@@ -2,67 +2,54 @@ package datastructures
 
 import (
 	"fmt"
-	"reflect"
 )
 
-type StackServicer interface {
-	Push(ele any)
-	Pop()
-	Top() any
-	GetStack() []any
-	IsEmpty() bool
+// Stack represents a stack of elements.
+type Stack[T any] struct {
+	stack []T
 }
 
-type stack struct {
-	stackArr  []any
-	stackType reflect.Type
-}
+// NewStack returns a new stack.
+func NewStack[T any](initialCapacity ...int) Stack[T] {
+	capacity := 512
 
-func InitStack[T string | []int](ele T) StackServicer {
-	var stackArr []any
-	var stackType reflect.Type
-	if arr, ok := any(ele).([]int); ok {
-		for i := 0; i < len(ele); i++ {
-			stackArr = append(stackArr, arr[i])
-		}
-		stackType = reflect.TypeOf(len(arr))
-	} else if arr, ok := any(ele).(string); ok {
-		for i := 0; i < len(ele); i++ {
-			stackArr = append(stackArr, arr[i])
-		}
-		stackType = reflect.TypeOf(ele)
+	if len(initialCapacity) > 0 {
+		capacity = initialCapacity[0]
 	}
 
-	return &stack{
-		stackArr:  stackArr,
-		stackType: stackType,
+	return Stack[T]{
+		stack: make([]T, 0, capacity),
 	}
 }
 
-func (s *stack) Push(ele any) {
-	if s.stackType == reflect.TypeOf(ele) {
-		s.stackArr = append(s.stackArr, ele)
-	} else {
-		fmt.Println("Does not support this type")
+// Len returns the number of elements in the stack.
+func (s *Stack[T]) Len() int {
+	return len(s.stack)
+}
+
+// IsEmpty returns true if the stack is empty.
+func (s *Stack[T]) IsEmpty() bool {
+	return len(s.stack) == 0
+}
+
+// Push pushes the element onto the stack.
+func (s *Stack[T]) Push(value T) {
+	s.stack = append(s.stack, value)
+}
+
+// Pop removes and returns the top element of the stack.
+func (s *Stack[T]) Pop() (zero T, err error) {
+	if s.IsEmpty() {
+		err = fmt.Errorf("can not perform `Stack.Pop()`, stack is empty")
+		return zero, err
 	}
-}
 
-func (s *stack) Pop() {
-	s.stackArr = s.stackArr[0 : len(s.stackArr)-1]
-}
+	// Get the index of the top most element.
+	index := len(s.stack) - 1
+	// Index into the slice and obtain the last element.
+	elm := s.stack[index]
+	// Remove it from the stack by slicing it off.
+	s.stack = s.stack[:index]
 
-func (s *stack) Top() any {
-	if len(s.stackArr) == 0 {
-		return nil
-	} else {
-		return s.stackArr[len(s.stackArr)-1]
-	}
-}
-
-func (s *stack) GetStack() []any {
-	return s.stackArr
-}
-
-func (s *stack) IsEmpty() bool {
-	return len(s.stackArr) == 0
+	return elm, nil
 }
