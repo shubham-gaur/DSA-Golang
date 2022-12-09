@@ -1,10 +1,10 @@
 package main
 
 import (
-	"dsa/custom-type/setarray"
-	"dsa/problems/array"
-	"dsa/recursion/maze"
-	"dsa/searching/bst"
+	"github.com/shubham-gaur/dsa-golang/custom-type/setarray"
+	"github.com/shubham-gaur/dsa-golang/datastructures"
+	"github.com/shubham-gaur/dsa-golang/recursion/maze"
+	"github.com/shubham-gaur/dsa-golang/searching/bst"
 
 	"github.com/shubham-gaur/logit"
 )
@@ -20,6 +20,6 @@ func main() {
 	maze.RunIntMaze()
 	logit.Info.Println(logit.GetCurrentFunctionName(), "Boolean Maze::")
 	maze.RunBoolMaze()
-	logit.Info.Println(logit.GetCurrentFunctionName(), "Matching Brackets::")
-	array.RunCheckMatchingBrackets()
+	logit.Info.Println(logit.GetCurrentFunctionName(), "Graph::")
+	datastructures.PrintEgDirectedGraph()
 }

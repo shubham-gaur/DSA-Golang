@@ -1,7 +1,7 @@
 package array
 
 import (
-	ds "dsa/datastructures"
+	ds "github.com/shubham-gaur/dsa-golang/datastructures"
 )
 
 /*

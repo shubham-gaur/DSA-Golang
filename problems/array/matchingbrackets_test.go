@@ -46,6 +46,10 @@ func TestValidateParenthesisStack(t *testing.T) {
 			"(((*****)",
 			true,
 		},
+		{
+			"******((()",
+			false,
+		},
 	}
 
 	for idx, tc := range tests {

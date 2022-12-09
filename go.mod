@@ -1,4 +1,4 @@
-module dsa
+module github.com/shubham-gaur/dsa-golang
 
 go 1.19
 
